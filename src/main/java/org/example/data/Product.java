@@ -12,7 +12,9 @@ public class Product {
     private BigDecimal price;
     private Rating rating;
 
-    public Product(){};
+    public Product(){
+        this(0,"no name",BigDecimal.ZERO);
+    };
 
     public Product(int id, String name, BigDecimal price, Rating rating) {
         this(id, name, price);
@@ -30,25 +32,19 @@ public class Product {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+
 
     public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(final BigDecimal price) {
-        this.price = price;
-    }
+
 
     public BigDecimal getDiscount(){
         return price.multiply(DISCOUNT_RATE).setScale(2, HALF_UP);
