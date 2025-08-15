@@ -53,4 +53,8 @@ public class Product {
     public Rating getRating(){
         return rating;
     }
+
+    public Product applyRating(Rating newRating){
+        return new Product(this.id,this.name,this.price,newRating);
+    }
 }
