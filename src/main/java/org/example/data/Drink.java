@@ -2,6 +2,7 @@ package org.example.data;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Drink extends Product{
 
@@ -10,4 +11,11 @@ public class Drink extends Product{
     }
 
 
+    @Override
+    public BigDecimal getDiscount() {
+        LocalTime now  = LocalTime.now();
+//        System.out.println(now);
+        return (now.isAfter(LocalTime.of(12,30)) && now.isBefore(LocalTime.of(13,30)))
+                ? super.getDiscount() : BigDecimal.ZERO;
+    }
 }
