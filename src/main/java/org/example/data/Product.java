@@ -1,6 +1,8 @@
 package org.example.data;
 
 import java.math.BigDecimal;
+import java.util.Objects;
+
 import static java.math.RoundingMode.HALF_UP;
 import static org.example.data.Rating.*;
 
@@ -67,5 +69,18 @@ public class Product {
                 getDiscount() +
                 ", rating=" + rating.getStars()
                 ;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Product)) return false;
+        Product product = (Product) o;
+        return id == product.id && Objects.equals(name, product.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }
