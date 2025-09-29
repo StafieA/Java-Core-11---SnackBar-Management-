@@ -18,4 +18,9 @@ public class Drink extends Product{
         return (now.isAfter(LocalTime.of(12,30)) && now.isBefore(LocalTime.of(13,30)))
                 ? super.getDiscount() : BigDecimal.ZERO;
     }
+
+    @Override
+    public Product applyRating(Rating newRating) {
+        return new Drink(getId(), getName(), getPrice(), newRating);
+    }
 }

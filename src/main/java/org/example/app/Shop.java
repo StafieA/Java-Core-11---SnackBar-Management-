@@ -16,7 +16,7 @@ public class Shop
 {
     public static void main( String[] args )
     {
-        Product p1 = new Product(101,"tea",BigDecimal.valueOf(1.99));
+        Product p1 = new Drink(101,"tea",BigDecimal.valueOf(1.99),Rating.THREE_STAR);
         Product p2 = new Drink(102,"coffee",BigDecimal.valueOf(1.99), Rating.FOUR_STAR);
         Product p3 = new Food(103,"cake",BigDecimal.valueOf(3.99), Rating.FIVE_STAR, LocalDate.now().plusDays(2));
         Product p4 = p1.applyRating(Rating.THREE_STAR);

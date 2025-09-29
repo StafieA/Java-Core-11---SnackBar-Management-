@@ -6,7 +6,7 @@ import java.util.Objects;
 import static java.math.RoundingMode.HALF_UP;
 import static org.example.data.Rating.*;
 
-public class Product {
+public abstract class Product {
 
     public static final BigDecimal DISCOUNT_RATE = BigDecimal.valueOf(0.1);
     private int id;
@@ -56,9 +56,7 @@ public class Product {
         return rating;
     }
 
-    public Product applyRating(Rating newRating){
-        return new Product(this.id,this.name,this.price,newRating);
-    }
+    public abstract Product applyRating(Rating newRating);
 
     @Override
     public String toString() {
