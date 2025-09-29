@@ -1,6 +1,8 @@
 package org.example.data;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Objects;
 
 import static java.math.RoundingMode.HALF_UP;
@@ -58,10 +60,14 @@ public abstract class Product {
 
     public abstract Product applyRating(Rating newRating);
 
+    public LocalDate getBestBefore(){
+        return LocalDate.now();
+    }
+
     @Override
     public String toString() {
-        return "Product {" +
-                "id=" + id +
+        return
+                 id +
                 ", name='" + name + '\'' +
                 ", price=" + price +", discount=" +
                 getDiscount() +

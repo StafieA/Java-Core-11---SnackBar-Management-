@@ -22,11 +22,15 @@ public class Shop
         Product p4 = p1.applyRating(Rating.THREE_STAR);
         Product p5 = new Drink(104,"chocolate",BigDecimal.valueOf(2.99), Rating.FIVE_STAR);
         Product p6 = new Food(104,"chocolate",BigDecimal.valueOf(2.99), Rating.FIVE_STAR, LocalDate.now().plusDays(2));
+        Product p7 = p3.applyRating(Rating.FOUR_STAR);
+        Product p8 = p1.applyRating(Rating.TWO_STAR);
+
 
         System.out.println(p5.equals(p6));
         System.out.println(p1);
-        System.out.println(p2);
         System.out.println(p3);
+        System.out.println(p7);
+        System.out.println(p8);
 
     }
 }
