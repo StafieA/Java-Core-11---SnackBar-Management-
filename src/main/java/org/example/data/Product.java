@@ -71,7 +71,7 @@ public abstract class Product {
                 ", name='" + name + '\'' +
                 ", price=" + price +", discount=" +
                 getDiscount() +
-                ", rating=" + rating.getStars()
+                ", rating=" + rating.getStars()+" "+ getBestBefore()
                 ;
     }
 
