@@ -20,8 +20,8 @@ public class Review {
 
     @Override
     public String toString() {
-        return "Review{" +
-                "rating=" + rating +
+        return "{" +
+                "rating=" + rating.getStars() +
                 ", comments='" + comments + '\'' +
                 '}';
     }

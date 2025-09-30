@@ -30,6 +30,9 @@ public class Shop
         System.out.println(p3);
         System.out.println(p7);
         System.out.println(p8);
-
+        System.out.println("=====================");
+        System.out.println(p6);
+        System.out.println(pm.reviewProduct(p6,Rating.FOUR_STAR,"E bun"));
+        System.out.println(pm);
     }
 }
