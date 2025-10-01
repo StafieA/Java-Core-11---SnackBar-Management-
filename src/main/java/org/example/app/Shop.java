@@ -4,6 +4,7 @@ import org.example.data.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Locale;
 
 /**
  * Hello world!
@@ -13,7 +14,7 @@ public class Shop
 {
     public static void main( String[] args )
     {
-        ProductManager pm = new ProductManager();
+        ProductManager pm = new ProductManager(Locale.US);
 
         Product p1 = pm.createProduct(101,"tea",BigDecimal.valueOf(1.99),Rating.THREE_STAR);
         Product p2 = pm.createProduct(102,"coffee",BigDecimal.valueOf(1.99), Rating.FOUR_STAR);
