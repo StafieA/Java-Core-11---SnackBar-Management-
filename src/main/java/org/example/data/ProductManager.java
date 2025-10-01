@@ -10,8 +10,8 @@ import java.util.*;
 
 public class ProductManager {
 
-    private Product product;
-    private Review[] reviews = new Review[5];
+//    private Product product;
+
     Map<Product, List<Review>> products = new HashMap<>();
 
     private Locale locale;
@@ -41,28 +41,25 @@ public class ProductManager {
 
     public Product reviewProduct(Product p, Rating rat, String comment){
 
-         if(reviews[reviews.length-1] != null){
-             reviews = Arrays.copyOf(reviews, reviews.length + 5);
-         }
-         int i = 0, sum = 0;
-         boolean reviewed = false;
-         while (i < reviews.length && !reviewed){
-             if(reviews[i] == null){
-                 reviews[i] = new Review(rat,comment);
-                 reviewed = true;
-             }
-             sum += reviews[i].getRating().ordinal();
-             i++;
-         }
 
-//        System.out.println("i inainte sa fie suma calculata "+ i );
-         int averageRating = Math.round((float) sum /i);
-         this.product = p.applyRating(averageRating);
-         return this.product;
+        List<Review> reviews = products.get(p);
+          products.remove(p);
+          reviews.add(new Review(rat,comment));
+          int sum = 0;
+          for(Review review : reviews){
+              sum += review.getRating().ordinal();
+          }
+
+         int averageRating = Math.round((float) sum /reviews.size());
+         Product product = p.applyRating(averageRating);
+         products.put(product,reviews);
+         return product;
     }
 
-    public void printProductReport(){
+    public void printProductReport(Product p){
         StringBuilder txt = new StringBuilder();
+//        Set<Product> prod = products.keySet();
+//        Products product = products.
         txt.append(MessageFormat.format(resources.getString("product"),
                 product.getName().substring(0,1).toUpperCase()+product.getName().substring(1).toLowerCase(),
                 moneyFormat.format(product.getPrice()),
