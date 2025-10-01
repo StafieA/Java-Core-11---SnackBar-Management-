@@ -6,13 +6,14 @@ import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class ProductManager {
 
     private Product product;
-    private Review review;
+    private Review[] reviews = new Review[5];
 
     private Locale locale;
     private ResourceBundle resources;
@@ -38,8 +39,24 @@ public class ProductManager {
     }
 
     public Product reviewProduct(Product p, Rating rat, String comment){
-         review =  new Review(rat,comment);
-         this.product = p.applyRating(rat);
+
+         if(reviews[reviews.length-1] != null){
+             reviews = Arrays.copyOf(reviews, reviews.length + 5);
+         }
+         int i = 0, sum = 0;
+         boolean reviewed = false;
+         while (i < reviews.length && !reviewed){
+             if(reviews[i] == null){
+                 reviews[i] = new Review(rat,comment);
+                 reviewed = true;
+             }
+             sum += reviews[i].getRating().ordinal();
+             i++;
+         }
+
+//        System.out.println("i inainte sa fie suma calculata "+ i );
+         int averageRating = Math.round((float) sum /i);
+         this.product = p.applyRating(averageRating);
          return this.product;
     }
 
@@ -51,26 +68,22 @@ public class ProductManager {
                 product.getRating().getStars(),
                 dateFormat.format(product.getBestBefore())));
         txt.append('\n');
-        if(review != null){
-            txt.append(MessageFormat.format(resources.getString("review"),
-                    review.getRating().getStars(),
-                    review.getComments()));
-        } else {
+        if(reviews[0] == null){
             txt.append(resources.getString("no.reviews"));
+            txt.append("\n");
         }
-        txt.append('\n');
+        for(int i = 0; i < reviews.length; i++){
+            if(reviews[i] != null) {
+                txt.append(MessageFormat.format(resources.getString("review"),
+                        reviews[i].getRating().getStars(),"#"+
+                        reviews[i].getComments()));
+                txt.append("\n");
+            }
+        }
+
+//        txt.append('\n');
         System.out.println(txt);
     }
 
-    @Override
-    public String toString() {
-        return "ProductManager{" +
-                "product=" + product +
-                ", review=" + review +
-                ", locale=" + locale +
-                ", resources=" + resources +
-                ", dateFormat=" + dateFormat +
-                ", moneyFormat=" + moneyFormat +
-                '}';
-    }
+
 }
