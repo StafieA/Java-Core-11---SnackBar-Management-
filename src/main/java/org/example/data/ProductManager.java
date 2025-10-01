@@ -1,6 +1,7 @@
 package org.example.data;
 
 import java.math.BigDecimal;
+import java.text.MessageFormat;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -40,6 +41,25 @@ public class ProductManager {
          review =  new Review(rat,comment);
          this.product = p.applyRating(rat);
          return this.product;
+    }
+
+    public void printProductReport(){
+        StringBuilder txt = new StringBuilder();
+        txt.append(MessageFormat.format(resources.getString("product"),
+                product.getName().substring(0,1).toUpperCase()+product.getName().substring(1).toLowerCase(),
+                moneyFormat.format(product.getPrice()),
+                product.getRating().getStars(),
+                dateFormat.format(product.getBestBefore())));
+        txt.append('\n');
+        if(review != null){
+            txt.append(MessageFormat.format(resources.getString("review"),
+                    review.getRating().getStars(),
+                    review.getComments()));
+        } else {
+            txt.append(resources.getString("no.reviews"));
+        }
+        txt.append('\n');
+        System.out.println(txt);
     }
 
     @Override
