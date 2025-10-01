@@ -34,12 +34,12 @@ public class Shop
 //        System.out.println("=====================");
 //        System.out.println(p6);
 //        System.out.println(pm.reviewProduct(p6,Rating.FOUR_STAR,"E bun"));
-        pm.printProductReport();
+        pm.printProductReport(p1);
         pm.reviewProduct(p1,Rating.FIVE_STAR,"M-a uimit");
 
         pm.reviewProduct(p1,Rating.ONE_STAR,"Jeg");
 
         pm.reviewProduct(p1,Rating.THREE_STAR,"Mediu");
-        pm.printProductReport();
+        pm.printProductReport(p1);
     }
 }

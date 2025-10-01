@@ -51,30 +51,30 @@ public class ProductManager {
           }
 
          int averageRating = Math.round((float) sum /reviews.size());
-         Product product = p.applyRating(averageRating);
+         Product product = p.applyRating(Rateable.convert(averageRating));
          products.put(product,reviews);
          return product;
     }
 
-    public void printProductReport(Product p){
+    public void printProductReport(Product product){
         StringBuilder txt = new StringBuilder();
-//        Set<Product> prod = products.keySet();
-//        Products product = products.
+        List<Review> reviews = products.get(product);
+
         txt.append(MessageFormat.format(resources.getString("product"),
                 product.getName().substring(0,1).toUpperCase()+product.getName().substring(1).toLowerCase(),
                 moneyFormat.format(product.getPrice()),
                 product.getRating().getStars(),
                 dateFormat.format(product.getBestBefore())));
         txt.append('\n');
-        if(reviews[0] == null){
+        if(reviews.isEmpty()){
             txt.append(resources.getString("no.reviews"));
             txt.append("\n");
         }
-        for(int i = 0; i < reviews.length; i++){
-            if(reviews[i] != null) {
+        for(Review review : reviews){
+            if(review != null) {
                 txt.append(MessageFormat.format(resources.getString("review"),
-                        reviews[i].getRating().getStars(),"#"+
-                        reviews[i].getComments()));
+                        review.getRating().getStars(),"#"+
+                        review.getComments()));
                 txt.append("\n");
             }
         }
